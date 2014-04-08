@@ -11,11 +11,19 @@
   </head>
   <body>
     <main class="container">
-      <header>
+      <header class="center">
         <a href="{{ link('/') }}">
-          <h1 class="blog-title center">{{ blog_name }}</h1>
-          <p class="blog-description center">{{ blog_description }}</p>
+          <h1 class="blog-title">{{ blog_name }}</h1>
+          <p class="blog-description">{{ blog_description }}</p>
         </a>
+        {% if logged_in %}
+          <a class="action" href="{{ link('/settings') }}">Settings</a>
+          <a class="action" href="{{ link('/compose') }}">New post</a>
+          {% if post %}
+            <a class="action" href="{{ link('/compose/', post.id) }}">Edit</a>
+          {% endif %}
+          <a class="action" href="{{ link('/logout') }}">Log out</a>
+        {% endif %}
       </header>
       {% block content %}{% endblock %}
     </main>

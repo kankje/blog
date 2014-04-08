@@ -31,7 +31,7 @@ class Application(tornado.web.Application):
         self.renderer = TemplateRenderer(os.path.join(self.config.root_path, 'templates'))
         self.renderer.set_globals(
             subdir=self.config.subdir,
-            link=lambda path: self.config.subdir + path
+            link=lambda *args: self.config.subdir + ''.join(str(arg) for arg in args)
         )
 
         self.admin_settings = None
@@ -39,11 +39,10 @@ class Application(tornado.web.Application):
 
         tornado.web.Application.__init__(
             self,
-            [
-                (self.config.subdir + route, end[0], end[1] if len(end) == 2 else None)
-                for route, *end
-                in get_routes(os.path.join(self.config.root_path, 'assets'))
-            ],
+            get_routes(
+                self.config.subdir,
+                os.path.join(self.config.root_path, 'assets')
+            ),
             xsrf_cookies=True,
             cookie_secret=self.config.cookie_secret,
             login_url='/login'

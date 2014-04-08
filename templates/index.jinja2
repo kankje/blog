@@ -1,17 +1,24 @@
 {% extends 'layout/layout.jinja2' %}
 
 {% block content %}
-  {% if logged_in %}
-    <a class="btn btn-primary" href="{{ link('/settings') }}">Settings</a>
-    <a class="btn btn-primary" href="{{ link('/compose') }}">New post</a>
-    <a class="btn btn-danger" href="{{ link('/logout') }}">Log out</a>
-  {% endif %}
   {% for post in posts %}
     <div class="post">
-      <a href="{{ link('/post/' + post.id|string + '/' + post.link_text) }}">
-        <h2>{{ post.title }}</h2>
+      <a href="{{ link('/post/', post.id, '/', post.link_text) }}">
+        <h2 class="post-title">{{ post.title }}</h2>
         <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
       </a>
     </div>
   {% endfor %}
+  {% if page > page_count %}
+    <a class="action prev-page" href="{{ link('/page/', page - 1) }}">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      Previous
+    </a>
+  {% endif %}
+  {% if page > page_count %}
+    <a class="action next-page" href="{{ link('/page/', page + 1) }}">
+      Next
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  {% endif %}
 {% endblock %}

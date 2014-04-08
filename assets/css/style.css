@@ -1,3 +1,11 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded- opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+
 /* Basic layout */
 
 html, body {
@@ -31,6 +39,10 @@ footer {
   text-align: center;
 }
 
+.action {
+  margin: 10px;
+}
+
 /* Forms */
 
 .form {
@@ -54,24 +66,27 @@ textarea {
 
 /* ... */
 
+header {
+  margin-bottom: 50px;
+}
+
 .blog-title {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 10px;
 }
 
 .blog-description {
-  margin-bottom: 100px;
   color: #bbb;
   font-size: 12pt;
 }
 
-h2 {
-  font-size: 18pt;
-  margin-bottom: 5px;
-}
-
 .post {
   margin-bottom: 20px;
+}
+
+.post-title {
+  font-size: 18pt;
+  margin-bottom: 5px;
 }
 
 .post-date {
@@ -80,9 +95,13 @@ h2 {
 }
 
 .post-content h1 {
-  font-size: 20pt;
+  font-size: 16pt;
 }
 
 .post-content h2 {
-  font-size: 14pt;
+  font-size: 12pt;
+}
+
+.next-page {
+  float: right;
 }
