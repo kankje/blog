@@ -8,7 +8,7 @@
   {% endif %}
   {% for post in posts %}
     <div class="post">
-      <a href="{{ link('/post/' + str(post.id) + '/' + post.link_text) }}">
+      <a href="{{ link('/post/' + post.id|string + '/' + post.link_text) }}">
         <h2>{{ post.title }}</h2>
         <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
       </a>

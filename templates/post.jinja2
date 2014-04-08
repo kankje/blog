@@ -5,7 +5,7 @@
 {% block content %}
   <div class="post">
     {% if logged_in %}
-      <a class="btn btn-primary" href="{{ link('/compose/' + str(post.id)) }}">Edit</a>
+      <a class="btn btn-primary" href="{{ link('/compose/' + post.id|string) }}">Edit</a>
     {% endif %}
     <h1>{{ post.title }}</h1>
     <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
