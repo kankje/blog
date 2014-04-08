@@ -1,4 +1,4 @@
-from tornado.web import RedirectHandler, StaticFileHandler
+from tornado.web import StaticFileHandler
 
 from handlers import IndexHandler, PostHandler, NotFoundHandler
 from handlers.admin import InstallHandler, LoginHandler, LogoutHandler, \

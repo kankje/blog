@@ -3,9 +3,9 @@
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-  <div class="post">
+  <article>
     <h1>{{ post.title }}</h1>
     <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
     <div class="post-content">{{ post.content_html }}</div>
-  </div>
+  </article>
 {% endblock %}
