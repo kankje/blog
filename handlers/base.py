@@ -13,7 +13,7 @@ class BaseHandler(RequestHandler):
         self._session = None
 
     def prepare(self):
-        if self.application.admin_settings is None and type(self) != 'InstallHandler':
+        if self.application.admin_settings is None and type(self).__name__ != 'InstallHandler':
             self.redirect('/install')
 
     def on_finish(self):
