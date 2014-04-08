@@ -1,0 +1,16 @@
+{% extends 'layout/layout.jinja2' %}
+{% from 'lib/form.jinja2' import render_fields %}
+
+{% block title %}blog login{% endblock %}
+
+{% block content %}
+  <div class="form">
+    {% if login_failed %}
+      <div class="alert alert-danger">Invalid username or password.</div>
+    {% endif %}
+    <form method="post">
+      {{ xsrf_token }}
+      {{ render_fields(form) }}
+    </form>
+  </div>
+{% endblock %}

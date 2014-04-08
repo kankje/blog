@@ -1,0 +1,12 @@
+*.py[cod]
+__pycache__
+*.egg-info
+/build
+/dist
+
+.idea
+
+/venv
+/config.ini
+/assets/robots.txt
+/assets/favicon.ico

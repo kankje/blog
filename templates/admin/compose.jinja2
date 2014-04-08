@@ -1,0 +1,14 @@
+{% extends 'layout/layout.jinja2' %}
+{% from 'lib/form.jinja2' import render_fields %}
+
+{% block title %}Compose a new post{% endblock %}
+
+{% block content %}
+  <div class="form">
+    <form method="post">
+      {{ xsrf_token }}
+      {{ render_fields(form) }}
+    </form>
+  </div>
+  <script src="{{ link('/assets/js/compose.js') }}"></script>
+{% endblock %}

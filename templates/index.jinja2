@@ -1,0 +1,17 @@
+{% extends 'layout/layout.jinja2' %}
+
+{% block content %}
+  {% if logged_in %}
+    <a class="btn btn-primary" href="{{ link('/settings') }}">Settings</a>
+    <a class="btn btn-primary" href="{{ link('/compose') }}">New post</a>
+    <a class="btn btn-danger" href="{{ link('/logout') }}">Log out</a>
+  {% endif %}
+  {% for post in posts %}
+    <div class="post">
+      <a href="{{ link('/post/' + str(post.id) + '/' + post.link_text) }}">
+        <h2>{{ post.title }}</h2>
+        <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
+      </a>
+    </div>
+  {% endfor %}
+{% endblock %}

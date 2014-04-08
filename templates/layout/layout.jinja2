@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{{ blog_name }}{% endblock %}</title>
+    <meta name="description" content="{{ blog_description }}">
+    <meta name="author" content="{{ blog_author }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ link('/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ link('/assets/css/style.css') }}">
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <a href="{{ link('/') }}">
+          <h1 class="blog-title center">{{ blog_name }}</h1>
+          <p class="blog-description center">{{ blog_description }}</p>
+        </a>
+      </header>
+      {% block content %}{% endblock %}
+    </main>
+    {% if blog_author %}
+      <footer>
+        <div id="footer-fader"></div>
+        <div class="container">
+          <p>Copyright &copy; {{ blog_author }}</p>
+        </div>
+      </footer>
+    {% endif %}
+  </body>
+</html>
