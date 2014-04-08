@@ -9,7 +9,7 @@ def get_routes(asset_path):
     return [
         (r'/', IndexHandler),
         (r'/page/(\d+)', IndexHandler),
-        (r'^/post/(\d+)(/+[a-zA-Z0-9-]*)?$', PostHandler),
+        (r'/post/(\d+)(/+[a-zA-Z0-9-]*)?', PostHandler),
 
         # Admin
         (r'/login', LoginHandler),
