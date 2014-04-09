@@ -83,8 +83,13 @@ article {
   margin-bottom: 20px;
 }
 
-.post-title {
-  font-size: 20pt;
+h1.post-title {
+  font-size: 24pt;
+  margin-bottom: 5px;
+}
+
+h2.post-title {
+  font-size: 22pt;
   margin-bottom: 5px;
 }
 

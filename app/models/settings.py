@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Binary, Text
 
-from models import Base
+from app.models import Base
 
 
 class Settings(Base):

@@ -1,4 +1,4 @@
-from handlers import BaseHandler, authenticated
+from app.handlers import BaseHandler, authenticated
 
 
 class LogoutHandler(BaseHandler):

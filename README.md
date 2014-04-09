@@ -39,7 +39,7 @@ Installation
 2. Change the working directory to the install directory: `$ cd /var/www`
 3. Clone the repository: `$ git clone git@github.com:kankje/blog.git`
 4. Copy and edit the config files accordingly:
-    * `$ cp docs/config/example.config.ini config.ini`
+    * `$ cp docs/config/example.app.ini config/app.ini`
     * `$ cp docs/config/example.nginx.conf /etc/nginx/conf.d/blog.conf`
     * `$ cp docs/config/example.upstart.conf /etc/init/blog.conf`
 5. Create a virtualenv: `$ virtualenv venv`
@@ -48,3 +48,8 @@ Installation
 8. Start the blog service: `$ start blog`
 9. Visit `https://your-blog.com/install`
 10. After the installation, you can log in using `https://your-blog.com/login`
+
+For developers
+==============
+
+* You can run tests by running `$ nosetests` in the project root.

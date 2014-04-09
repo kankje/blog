@@ -1,6 +1,6 @@
-from handlers import BaseHandler
-from models import Settings
-from forms.admin import LoginForm
+from app.handlers import BaseHandler
+from app.models import Settings
+from app.forms.admin import LoginForm
 
 
 class LoginHandler(BaseHandler):

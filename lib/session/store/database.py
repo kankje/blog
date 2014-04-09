@@ -3,7 +3,7 @@ import pickle
 
 from sqlalchemy.orm.exc import NoResultFound
 
-from models import Session
+from app.models import Session
 
 
 class DatabaseSessionStore:

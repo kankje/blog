@@ -1,6 +1,6 @@
 from sqlalchemy import Column, String, Binary, DateTime
 
-from models import Base
+from app.models import Base
 
 
 class Session(Base):

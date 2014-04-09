@@ -1,6 +1,6 @@
-from handlers import BaseHandler, authenticated
-from forms.admin import SettingsForm
-from models import Settings
+from app.handlers import BaseHandler, authenticated
+from app.forms.admin import SettingsForm
+from app.models import Settings
 
 
 class SettingsHandler(BaseHandler):

@@ -5,6 +5,9 @@ setup(
     name='blog',
     version='0.1',
     install_requires=[
+        # Tests
+        'nose==1.3.1',
+
         # Web
         'tornado==3.2',
         'MarkupSafe==0.19',

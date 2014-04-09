@@ -8,14 +8,17 @@ from lib.util import Config, Crypt
 from lib.database import Database
 from lib.session import DatabaseSessionStore
 from lib.web import TemplateRenderer
-from routes import get_routes
-from models import Settings
+from app.config import get_routes
+from app.models import Settings
 
 
 class Application(tornado.web.Application):
     def __init__(self):
         # "Global" services
-        self.config = Config(os.path.dirname(os.path.abspath(__file__)), 'config.ini')
+        self.config = Config(
+            os.path.dirname(os.path.abspath(__file__)),
+            os.path.join('app', 'config', 'app.ini')
+        )
         self.crypt = Crypt(2000, 32)
         self.db = Database(
             '{0}://{1}:{2}@{3}:{4}/{5}'.format(
@@ -28,7 +31,7 @@ class Application(tornado.web.Application):
             )
         )
         self.session_store = DatabaseSessionStore(self.db, 120)
-        self.renderer = TemplateRenderer(os.path.join(self.config.root_path, 'templates'))
+        self.renderer = TemplateRenderer(os.path.join(self.config.root_path, 'app', 'templates'))
         self.renderer.set_globals(
             subdir=self.config.subdir,
             link=lambda *args: self.config.subdir + ''.join(str(arg) for arg in args)

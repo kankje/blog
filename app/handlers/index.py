@@ -1,7 +1,7 @@
 from math import ceil
 
-from handlers import BaseHandler
-from models import Post
+from app.handlers import BaseHandler
+from app.models import Post
 
 
 class IndexHandler(BaseHandler):
@@ -15,7 +15,7 @@ class IndexHandler(BaseHandler):
                 ceil(session.query(Post).count() / self.POSTS_PER_PAGE)
             )
             page = min(page_count, page)
-            posts = session.query(Post).order_by(Post.creation_date).limit(5) \
+            posts = session.query(Post).order_by(Post.creation_date.desc()).limit(5) \
                 .offset((page - 1) * self.POSTS_PER_PAGE)
             self.render(
                 'index.jinja2',

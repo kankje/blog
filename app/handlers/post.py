@@ -1,5 +1,5 @@
-from handlers import BaseHandler
-from models import Post
+from app.handlers import BaseHandler
+from app.models import Post
 
 
 class PostHandler(BaseHandler):

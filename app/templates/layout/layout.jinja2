@@ -17,12 +17,20 @@
           <p class="blog-description">{{ blog_description }}</p>
         </a>
         {% if logged_in %}
-          <a class="action" href="{{ link('/settings') }}">Settings</a>
-          <a class="action" href="{{ link('/compose') }}">New post</a>
+          <a class="action" href="{{ link('/settings') }}">
+            <span class="glyphicon glyphicon-wrench"></span> Settings
+          </a>
+          <a class="action" href="{{ link('/compose') }}">
+            <span class="glyphicon glyphicon-pencil"></span> New post
+          </a>
           {% if post %}
-            <a class="action" href="{{ link('/compose/', post.id) }}">Edit</a>
+            <a class="action" href="{{ link('/compose/', post.id) }}">
+              <span class="glyphicon glyphicon-edit"></span> Edit
+            </a>
           {% endif %}
-          <a class="action" href="{{ link('/logout') }}">Log out</a>
+          <a class="action" href="{{ link('/logout') }}">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+          </a>
         {% endif %}
       </header>
       {% block content %}{% endblock %}

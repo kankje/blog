@@ -1,7 +1,7 @@
 from tornado.web import StaticFileHandler
 
-from handlers import IndexHandler, PostHandler, NotFoundHandler
-from handlers.admin import InstallHandler, LoginHandler, LogoutHandler, \
+from app.handlers import IndexHandler, PostHandler, NotFoundHandler
+from app.handlers.admin import InstallHandler, LoginHandler, LogoutHandler, \
     SettingsHandler, ComposeHandler
 
 

@@ -2,9 +2,9 @@ from datetime import datetime
 
 from markdown import markdown
 
-from handlers import BaseHandler, authenticated
-from forms.admin import ComposeForm
-from models import Post
+from app.handlers import BaseHandler, authenticated
+from app.forms.admin import ComposeForm
+from app.models import Post
 
 
 class ComposeHandler(BaseHandler):

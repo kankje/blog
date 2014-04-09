@@ -1,6 +1,6 @@
-from handlers import BaseHandler
-from forms.admin import InstallForm
-from models import Base, Settings
+from app.handlers import BaseHandler
+from app.forms.admin import InstallForm
+from app.models import Base, Settings
 
 
 class InstallHandler(BaseHandler):

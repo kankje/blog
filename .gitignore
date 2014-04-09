@@ -7,6 +7,6 @@ __pycache__
 .idea
 
 /venv
-/config.ini
+/app/config/app.ini
 /assets/robots.txt
 /assets/favicon.ico
