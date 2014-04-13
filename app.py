@@ -4,7 +4,7 @@ import tornado.web
 import tornado.ioloop
 from sqlalchemy.exc import SQLAlchemyError
 
-from lib.util import Config, Crypt
+from lib.util import Config, Crypt, Canocalizer
 from lib.database import Database
 from lib.session import DatabaseSessionStore
 from lib.web import TemplateRenderer
@@ -36,6 +36,7 @@ class Application(tornado.web.Application):
             subdir=self.config.subdir,
             link=lambda *args: self.config.subdir + ''.join(str(arg) for arg in args)
         )
+        self.canocalizer = Canocalizer()
 
         self.admin_settings = None
         self.reload_admin_settings()

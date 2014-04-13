@@ -19,7 +19,6 @@ class ComposeHandler(BaseHandler):
                 post = session.query(Post).filter_by(id=post_id).one()
                 self.form.id.data = post.id
                 self.form.title.data = post.title
-                self.form.link_text.data = post.link_text
                 self.form.content.data = post.content
         self.render(
             'admin/compose.jinja2',
@@ -33,13 +32,17 @@ class ComposeHandler(BaseHandler):
                 if self.form.id.data != '':
                     post = session.query(Post).filter_by(id=self.form.id.data).one()
                     post.title = self.form.title.data
-                    post.link_text = self.form.link_text.data
+                    post.link_text = self.application.canocalizer.canocalize(
+                        self.form.title.data
+                    )
                     post.content = self.form.content.data
                     post.content_html = markdown(self.form.content.data)
                 else:
                     post = Post(
                         title=self.form.title.data,
-                        link_text=self.form.link_text.data,
+                        link_text=self.application.canocalizer.canocalize(
+                            self.form.title.data
+                        ),
                         content=self.form.content.data,
                         content_html=markdown(self.form.content.data),
                         creation_date=datetime.now()
