@@ -3,19 +3,19 @@
 {% block content %}
   {% for post in posts %}
     <article>
-      <a href="{{ link('/post/', post.id, '/', post.link_text) }}">
+      <a href="{{ link('post', post.id, post.link_text) }}">
         <h2 class="post-title">{{ post.title }}</h2>
         <p class="post-date">{{ post.creation_date.strftime('%A, %B %e. %Y') }}</p>
       </a>
     </article>
   {% endfor %}
   {% if page > page_count %}
-    <a class="action prev-page" href="{{ link('/page/', page - 1) }}">
+    <a class="action prev-page" href="{{ link('page', page - 1) }}">
       <span class="glyphicon glyphicon-chevron-left"></span> Previous
     </a>
   {% endif %}
   {% if page > page_count %}
-    <a class="action next-page" href="{{ link('/page/', page + 1) }}">
+    <a class="action next-page" href="{{ link('page', page + 1) }}">
       Next <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
   {% endif %}

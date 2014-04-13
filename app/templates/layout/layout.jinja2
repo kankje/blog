@@ -6,29 +6,32 @@
     <meta name="description" content="{{ blog_description }}">
     <meta name="author" content="{{ blog_author }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{{ link('/assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ link('/assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ link('assets', 'css', 'bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ link('assets', 'css', 'style.css') }}">
   </head>
   <body>
     <main class="container">
       <header class="center">
-        <a href="{{ link('/') }}">
+        <a href="{{ link() }}">
           <h1 class="blog-title">{{ blog_name }}</h1>
           <p class="blog-description">{{ blog_description }}</p>
         </a>
         {% if logged_in %}
-          <a class="action" href="{{ link('/settings') }}">
+          <a class="action" href="{{ link('settings') }}">
             <span class="glyphicon glyphicon-wrench"></span> Settings
           </a>
-          <a class="action" href="{{ link('/compose') }}">
+          <a class="action" href="{{ link('compose') }}">
             <span class="glyphicon glyphicon-pencil"></span> New post
           </a>
           {% if post %}
-            <a class="action" href="{{ link('/compose/', post.id) }}">
+            <a class="action" href="{{ link('compose', post.id) }}">
               <span class="glyphicon glyphicon-edit"></span> Edit
             </a>
+            <a class="action" href="{{ link('delete', post.id) }}">
+              <span class="glyphicon glyphicon-remove"></span> Delete
+            </a>
           {% endif %}
-          <a class="action" href="{{ link('/logout') }}">
+          <a class="action" href="{{ link('logout') }}">
             <span class="glyphicon glyphicon-log-out"></span> Log out
           </a>
         {% endif %}

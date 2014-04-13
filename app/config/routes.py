@@ -2,7 +2,7 @@ from tornado.web import StaticFileHandler
 
 from app.handlers import IndexHandler, PostHandler, NotFoundHandler
 from app.handlers.admin import InstallHandler, LoginHandler, LogoutHandler, \
-    SettingsHandler, ComposeHandler
+    SettingsHandler, ComposeHandler, DeleteHandler
 
 
 def get_routes(subdir, asset_path):
@@ -20,6 +20,8 @@ def get_routes(subdir, asset_path):
             (r'/settings', SettingsHandler),
             (r'/compose', ComposeHandler),
             (r'/compose/(\d+)', ComposeHandler),
+            (r'/delete/(\d+)', DeleteHandler),
+            (r'/delete/(\d+)/confirm/(.*)', DeleteHandler),
             (r'/install', InstallHandler),
 
             # Static file serving through the app is supported, but not recommended

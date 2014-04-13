@@ -1,0 +1,14 @@
+{% extends 'layout/layout.jinja2' %}
+
+{% block title %}Delete a post{% endblock %}
+
+{% block content %}
+  <div class="form">
+    <div class="alert alert-danger">
+      Are you sure you want to delete the post "{{ post.title }}"?<br />
+      This action cannot be undone!
+    </div>
+    <a class="btn btn-danger" href="{{ link('delete', post.id, 'confirm', 'yes') }}">Delete</a>
+    <a class="btn btn-primary" href="{{ link('post', post.id, post.link_text) }}">Cancel</a>
+  </div>
+{% endblock %}

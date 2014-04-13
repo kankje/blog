@@ -34,7 +34,7 @@ class Application(tornado.web.Application):
         self.renderer = TemplateRenderer(os.path.join(self.config.root_path, 'app', 'templates'))
         self.renderer.set_globals(
             subdir=self.config.subdir,
-            link=lambda *args: self.config.subdir + ''.join(str(arg) for arg in args)
+            link=lambda *args: self.config.subdir + '/' + '/'.join(str(arg) for arg in args)
         )
         self.canocalizer = Canocalizer()
 
