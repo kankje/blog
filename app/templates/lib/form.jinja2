@@ -34,9 +34,9 @@
 {%- endmacro -%}
 
 {%- macro render_submit(field) -%}
-  <div class="actions">
-    <input type="submit" class="btn btn-primary" value="{{ field.label.text }}">
-  </div>
+  <button class="action">
+    <span class="glyphicon glyphicon-ok"></span> {{ field.label.text }}
+  </button>
 {%- endmacro -%}
 
 {%- macro render_field(field) -%}

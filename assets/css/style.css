@@ -59,6 +59,11 @@ footer {
   color: #b94a48;
 }
 
+button {
+  border: 0;
+  color: #3399f3;
+}
+
 .compose-form textarea {
   height: 300px;
   font-family: monospace;
@@ -82,7 +87,7 @@ header {
 }
 
 article {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 h1.post-title {
