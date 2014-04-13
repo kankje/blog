@@ -46,7 +46,7 @@ footer {
 
 .form {
   margin: 0 auto;
-  max-width: 370px;
+  max-width: 500px;
 }
 
 .important:before {
@@ -59,8 +59,10 @@ footer {
   color: #b94a48;
 }
 
-textarea {
+.compose-form textarea {
+  height: 300px;
   font-family: monospace;
+  resize: vertical;
 }
 
 /* ... */

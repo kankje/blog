@@ -4,7 +4,7 @@
 {% block title %}Compose a new post{% endblock %}
 
 {% block content %}
-  <div class="form">
+  <div class="form compose-form">
     <form method="post">
       {{ xsrf_token }}
       {{ render_fields(form) }}
