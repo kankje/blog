@@ -12,13 +12,14 @@ class Config:
 
         self.app_ip = parser.get('app', 'ip', fallback='127.0.0.1')
         self.app_port = parser.get('app', 'port')
+        self.debug = parser.getboolean('app', 'debug')
         self.cookie_secret = parser.get('app', 'cookie_secret')
         self.subdir = parser.get('app', 'subdir', fallback='')
         self.subdir = '/' + self.subdir if self.subdir != '' else ''
 
         self.db_type = parser.get('database', 'type')
         self.db_host = parser.get('database', 'host')
-        self.db_port = parser.get('database', 'port')
+        self.db_port = parser.getint('database', 'port')
         self.db_username = parser.get('database', 'username')
         self.db_password = parser.get('database', 'password')
         self.db_database = parser.get('database', 'database')

@@ -46,6 +46,7 @@ class Application(tornado.web.Application):
                 self.config.subdir,
                 os.path.join(self.config.root_path, 'assets')
             ),
+            debug=self.config.debug,
             xsrf_cookies=True,
             cookie_secret=self.config.cookie_secret,
             login_url='/login'
