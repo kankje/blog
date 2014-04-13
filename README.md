@@ -22,8 +22,8 @@ PostgreSQL
 
     CREATE DATABASE blog;
     \c blog
-    CREATE ROLE blog WITH PASSWORD 'password';
     CREATE SCHEMA blog;
+    CREATE ROLE blog WITH LOGIN PASSWORD 'password';
     GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA blog TO blog;
 
 MySQL
