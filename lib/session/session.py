@@ -6,7 +6,8 @@ class Session:
         self.data = store.get_session_data(session_id)
 
     def save(self):
-        self.store.save_session_data(self.id, self.data)
+        if len(self.data.keys()) > 0:
+            self.store.save_session_data(self.id, self.data)
 
     def destroy(self):
         self.data = {}
