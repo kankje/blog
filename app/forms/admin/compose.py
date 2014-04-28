@@ -1,7 +1,6 @@
+from flask.ext.wtf import Form
 from wtforms import HiddenField, TextField, TextAreaField, SubmitField
-from wtforms.validators import InputRequired, Regexp
-
-from lib.web import Form
+from wtforms.validators import InputRequired
 
 
 class ComposeForm(Form):

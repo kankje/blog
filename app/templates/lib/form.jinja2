@@ -41,7 +41,7 @@
 
 {%- macro render_field(field) -%}
 	<div class="clearfix form-group">
-    {% if field.type == 'HiddenField' %}
+    {% if field.type == 'HiddenField' or field.type == 'CSRFTokenField' %}
       {{ field() }}
     {% else %}
       {% if field.type == 'BooleanField' %}

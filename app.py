@@ -1,77 +1,59 @@
 import os
-
-import tornado.web
-import tornado.ioloop
-from sqlalchemy.exc import SQLAlchemyError
-
-from lib.util import Config, Crypt, Canocalizer
-from lib.database import Database
-from lib.session import DatabaseSessionStore
-from lib.web import TemplateRenderer
-from app.config import get_routes
-from app.models import Settings
+from flask import Flask, request, g, render_template, redirect, url_for, send_from_directory
+from app import config
+from app.models import db, Settings
+from app.redis import redis
+from app.views.regular import regular
+from app.views.admin import admin
+from lib.session import RedisSessionInterface
 
 
-class Application(tornado.web.Application):
-    def __init__(self):
-        # "Global" services
-        self.config = Config(
-            os.path.dirname(os.path.abspath(__file__)),
-            os.path.join('app', 'config', 'app.ini')
-        )
-        self.crypt = Crypt(2000, 32)
-        self.db = Database(
-            '{0}://{1}:{2}@{3}:{4}/{5}'.format(
-                'postgresql+psycopg2' if self.config.db_type == 'postgresql' else 'mysql+pymysql',
-                self.config.db_username,
-                self.config.db_password,
-                self.config.db_host,
-                self.config.db_port,
-                self.config.db_database
-            )
-        )
-        self.session_store = DatabaseSessionStore(self.db, 120)
-        self.renderer = TemplateRenderer(os.path.join(self.config.root_path, 'app', 'templates'))
-        self.renderer.set_globals(
-            subdir=self.config.subdir,
-            link=lambda *args: self.config.subdir + '/' + '/'.join(str(arg) for arg in args)
-        )
-        self.canocalizer = Canocalizer()
+app = Flask(
+    __name__,
+    static_folder='assets',
+    template_folder=os.path.join('app', 'templates')
+)
+app.debug = config.debug
+app.secret_key = config.cookie_secret
 
-        self.admin_settings = None
-        self.reload_admin_settings()
+# Database
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(
+        config.db_user,
+        config.db_password,
+        config.db_host,
+        config.db_port,
+        config.db_name
+    )
+db.init_app(app)
 
-        tornado.web.Application.__init__(
-            self,
-            get_routes(
-                self.config.subdir,
-                os.path.join(self.config.root_path, 'assets')
-            ),
-            debug=self.config.debug,
-            xsrf_cookies=True,
-            cookie_secret=self.config.cookie_secret,
-            login_url='/login'
-        )
+# Sessions
+app.session_interface = RedisSessionInterface(redis)
 
-    def reload_admin_settings(self):
-        with self.db.session() as session:
-            try:
-                self.admin_settings = session.query(Settings).one()
-                self.renderer.set_globals(
-                    blog_name=self.admin_settings.blog_name,
-                    blog_description=self.admin_settings.blog_description,
-                    blog_author=self.admin_settings.blog_author
-                )
-            except SQLAlchemyError:
-                self.renderer.set_globals(
-                    blog_name='blog',
-                    blog_description='Installation',
-                    blog_author=''
-                )
+# Views
+app.register_blueprint(regular)
+app.register_blueprint(admin)
+
+
+@app.errorhandler(404)
+def not_found():
+    return render_template('error/404.jinja2'), 404
+
+
+@app.errorhandler(500)
+def not_found():
+    return render_template('error/500.jinja2'), 500
+
+
+@app.before_request
+def before_request():
+    if request.endpoint == 'static':
+        return
+    if not db.engine.dialect.has_table(db.engine.connect(), 'settings') and request.endpoint != 'admin.install':
+        return redirect(url_for('admin.install'))
+    if request.endpoint != 'admin.install':
+        g.settings = Settings.query.one()
 
 
 if __name__ == '__main__':
-    app = Application()
-    app.listen(app.config.app_port, app.config.app_ip)
-    print('Application started')
-    tornado.ioloop.IOLoop.instance().start()
+    app.run()

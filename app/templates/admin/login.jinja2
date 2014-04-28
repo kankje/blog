@@ -9,7 +9,7 @@
       <div class="alert alert-danger">Invalid username or password.</div>
     {% endif %}
     <form method="post">
-      {{ xsrf_token }}
+      {{ form.hidden_tag() }}
       {{ render_fields(form) }}
     </form>
   </div>
