@@ -1,20 +1,37 @@
 import os
-from flask import Flask, request, g, render_template, redirect, url_for, send_from_directory
+
+from flask import Flask, request, g, render_template, redirect, url_for
+from flask.ext.assets import Environment, Bundle
+
 from app import config
 from app.models import db, Settings
 from app.redis import redis
 from app.views.regular import regular
 from app.views.admin import admin
+from lib.jinja2.htmlcompress import HtmlCompress
 from lib.session import RedisSessionInterface
 
 
 app = Flask(
     __name__,
-    static_folder='assets',
+    static_folder='public',
     template_folder=os.path.join('app', 'templates')
 )
 app.debug = config.debug
 app.secret_key = config.cookie_secret
+
+# Jinja2 plugins
+app.jinja_env.add_extension(HtmlCompress)
+
+# Assets
+assets = Environment(app)
+assets.url = app.static_url_path
+css = Bundle(
+    '../assets/css/main.scss',
+    filters=['pyscss', 'cssmin'],
+    output='main.css'
+)
+assets.register('css', css)
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = \
@@ -49,9 +66,9 @@ def not_found():
 def before_request():
     if request.endpoint == 'static':
         return
-    if not db.engine.dialect.has_table(db.engine.connect(), 'settings') and request.endpoint != 'admin.install':
-        return redirect(url_for('admin.install'))
     if request.endpoint != 'admin.install':
+        if not db.engine.dialect.has_table(db.engine.connect(), 'settings'):
+            return redirect(url_for('admin.install'))
         g.settings = Settings.query.one()
 
 

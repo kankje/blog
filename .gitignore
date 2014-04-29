@@ -1,12 +1,13 @@
+.idea
+
 *.py[cod]
 __pycache__
 *.egg-info
 build/
 dist/
 
-.idea
-
 venv/
+assets/lib
+public/.webassets-cache
+public/main.css
 app/config.py
-assets/robots.txt
-assets/favicon.ico

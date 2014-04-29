@@ -1,6 +1,5 @@
 from unittest import TestCase
 from binascii import hexlify
-
 from lib.crypt import generate_salt, hash_password
 
 

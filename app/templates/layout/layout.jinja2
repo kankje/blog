@@ -6,8 +6,9 @@
     <meta name="description" content="{{ g.settings.blog_description }}">
     <meta name="author" content="{{ g.settings.blog_author }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    {% assets 'css' %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
   </head>
   <body>
     <main class="container">

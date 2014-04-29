@@ -1,6 +1,5 @@
 from unittest import TestCase
-
-from lib import canocalize
+from lib.canocalize import canocalize
 
 
 class TestCanocalize(TestCase):
