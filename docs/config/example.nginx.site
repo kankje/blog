@@ -1,0 +1,33 @@
+gzip on;
+
+location / {
+    try_files $uri @blog;
+}
+
+location @blog {
+    include uwsgi_params;
+    uwsgi_pass unix:/var/run/uwsgi/blog.sock;
+}
+
+# For subdirectory support:
+#
+#location = /blog {
+#    rewrite ^ /blog/;
+#}
+#
+#location /blog {
+#    try_files $uri @yourapplication;
+#}
+#
+#location @blog {
+#    include uwsgi_params;
+#    uwsgi_param SCRIPT_NAME /blog;
+#    uwsgi_modifier1 30;
+#    uwsgi_pass unix:/var/run/uwsgi/blog.sock;
+#}
+
+location /assets {
+    alias /var/www/blog/assets/;
+    autoindex off;
+    expires 7d;
+}

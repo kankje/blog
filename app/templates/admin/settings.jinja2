@@ -6,7 +6,7 @@
 {% block content %}
   <div class="form">
     <form method="post">
-      {{ xsrf_token }}
+      {{ form.hidden_tag() }}
       {{ render_fields(form) }}
     </form>
   </div>

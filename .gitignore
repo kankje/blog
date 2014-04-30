@@ -1,12 +1,12 @@
 *.py[cod]
 __pycache__
 *.egg-info
-/build
-/dist
+build/
+dist/
 
 .idea
 
-/venv
-/app/config/app.ini
-/assets/robots.txt
-/assets/favicon.ico
+venv/
+app/config.py
+assets/robots.txt
+assets/favicon.ico

@@ -1,7 +1,6 @@
+from flask.ext.wtf import Form
 from wtforms import TextField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length
-
-from lib.web import Form
 
 
 class SettingsForm(Form):

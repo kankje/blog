@@ -1,5 +1,17 @@
 Revision history for blog.
 
-0.1 2013-04-08
+1.0.0 2014-??-??
+
+  * Moved to Flask from Tornado.
+
+0.2.0 2014-04-13
+
+  * Posts are now sorted properly
+  * Style/layout improvements
+  * Unit tests
+  * Link text field does not exist anymore
+  * Added option to delete posts
+
+0.1.0 2014-04-08
 
   * First release.

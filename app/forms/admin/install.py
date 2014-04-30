@@ -1,7 +1,6 @@
+from flask.ext.wtf import Form
 from wtforms import TextField, PasswordField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length, EqualTo
-
-from lib.web import Form
 
 
 class InstallForm(Form):
