@@ -9,13 +9,13 @@
       </a>
     </article>
   {% endfor %}
-  {% if page > page_count %}
-    <a class="action prev-page" href="{{ url_for('index.page', page=page - 1) }}">
+  {% if page_num > page_count %}
+    <a class="action prev-page" href="{{ url_for('index.page', page_num=page_num - 1) }}">
       <span class="glyphicon glyphicon-chevron-left"></span> Previous
     </a>
   {% endif %}
-  {% if page > page_count %}
-    <a class="action next-page" href="{{ url_for('index.page', page=page + 1) }}">
+  {% if page_num > page_count %}
+    <a class="action next-page" href="{{ url_for('index.page', page_num=page_num + 1) }}">
       Next <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
   {% endif %}

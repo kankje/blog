@@ -20,6 +20,7 @@ setup(
         'psycopg2==2.5.2',
         'PyMySQL==0.6.1',
         'redis==2.9.1',
+        'compressinja==0.0.2',
 
         # Misc.
         'passlib==1.6.2',
