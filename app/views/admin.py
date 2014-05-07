@@ -85,15 +85,17 @@ def logout():
 def settings():
     form = SettingsForm()
 
-    settings = Settings.query.one()
-    form.blog_name.data = settings.blog_name
-    form.blog_description.data = settings.blog_description
-    form.blog_author.data = settings.blog_author
+    settings_ = Settings.query.one()
+    form.blog_name.data = settings_.blog_name
+    form.blog_description.data = settings_.blog_description
+    form.blog_author.data = settings_.blog_author
+    form.custom_html.data = settings_.custom_html
 
     if form.validate_on_submit():
-        settings.blog_name = form.blog_name.data
-        settings.blog_description = form.blog_description.data
-        settings.blog_author = form.blog_author.data
+        settings_.blog_name = form.blog_name.data
+        settings_.blog_description = form.blog_description.data
+        settings_.blog_author = form.blog_author.data
+        settings_.custom_html = form.custom_html.data
         db.session.commit()
         return redirect(url_for('regular.index'))
 

@@ -127,10 +127,14 @@ form {
   }
 }
 
+.settings-form #custom_html {
+  height: 200px;
+  font-family: monospace;
+}
+
 .compose-form textarea {
   height: 300px;
   font-family: monospace;
-  resize: vertical;
 }
 
 /* ... */

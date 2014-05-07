@@ -16,4 +16,6 @@ class SettingsForm(Form):
         InputRequired(),
         Length(1, 200)
     ])
+    custom_html = TextAreaField('Custom HTML')
+
     submit = SubmitField('Save')

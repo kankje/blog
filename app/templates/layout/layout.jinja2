@@ -53,5 +53,9 @@
       {% endif %}
 
     </div>
+
+    {% if g.settings.custom_html %}
+      {{ g.settings.custom_html }}
+    {% endif %}
   </body>
 </html>
