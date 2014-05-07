@@ -34,4 +34,4 @@ def index():
 
 @regular.route('/post/<post_id>/<link_text>')
 def post(post_id, link_text=None):
-    return render_template('post.jinja2', post=Post.query.filter_by(id=post_id).one())
+    return render_template('post.jinja2', post=Post.query.get_or_404(post_id))

@@ -4,10 +4,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  {% if login_failed %}
-    <div class="alert">Invalid username or password.</div>
-  {% endif %}
-  <form method="post">
-    {{ render(form) }}
-  </form>
+  <div class="form-container">
+    {% if login_failed %}
+      <div class="alert">Invalid username or password.</div>
+    {% endif %}
+
+    <form method="post">
+      {{ render(form) }}
+    </form>
+  </div>
 {% endblock %}

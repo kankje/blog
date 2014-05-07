@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}{{ g.settings.blog_name }}{% endblock %}</title>
+    <title>{% block title %}{{ g.settings.blog_name | safe }}{% endblock %}</title>
     <meta name="description" content="{{ g.settings.blog_description }}">
     <meta name="author" content="{{ g.settings.blog_author }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +15,10 @@
 
       <header>
         <a href="{{ url_for('regular.index') }}">
-          <h1 class="blog-title">{{ g.settings.blog_name }}</h1>
-          <p class="blog-description">{{ g.settings.blog_description }}</p>
+          <h1 class="blog-title">{{ g.settings.blog_name | safe }}</h1>
+          <p class="blog-description">
+            {{ g.settings.blog_description | nl2br | safe }}
+          </p>
         </a>
       </header>
 
@@ -26,18 +28,18 @@
             <i class="fa fa-wrench"></i> Settings
           </a>
           <a class="action" href="{{ url_for('admin.compose') }}">
-            <span class="fa fa-pencil"></span> New post
+            <i class="fa fa-pencil"></i> New post
           </a>
           {% if post %}
             <a class="action" href="{{ url_for('admin.compose', post_id=post.id) }}">
-              <span class="fa fa-pencil-square-o"></span> Edit
+              <i class="fa fa-pencil-square-o"></i> Edit
             </a>
             <a class="action" href="{{ url_for('admin.delete', post_id=post.id) }}">
-              <span class="fa fa-trash-o"></span> Delete
+              <i class="fa fa-trash-o"></i> Delete
             </a>
           {% endif %}
           <a class="action" href="{{ url_for('admin.logout') }}">
-            <span class="fa fa-sign-out"></span> Log out
+            <i class="fa fa-sign-out"></i> Log out
           </a>
         </nav>
       {% endif %}
@@ -48,7 +50,7 @@
 
       {% if g.settings.blog_author %}
         <footer>
-          Copyright &copy; {{ g.settings.blog_author }}
+          Copyright &copy; {{ g.settings.blog_author | safe }}
         </footer>
       {% endif %}
 

@@ -4,7 +4,9 @@
 {% block title %}Compose a new post{% endblock %}
 
 {% block content %}
-  <form class="compose-form" method="post">
-    {{ render(form) }}
-  </form>
+  <div class="form-container">
+    <form class="compose-form" method="post">
+      {{ render(form) }}
+    </form>
+  </div>
 {% endblock %}
