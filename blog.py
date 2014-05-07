@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, g, render_template, redirect, url_for, send_from_directory
+from flask import Flask, request, g, render_template, redirect, url_for
 from app import config
 from app.models import db, Settings
 from app.redis import redis
@@ -16,6 +16,14 @@ app = Flask(
 app.debug = config.debug
 app.secret_key = config.cookie_secret
 
+# Jinja2 extensions
+app.jinja_env.add_extension('compressinja.html.HtmlCompressor')
+
+# Views
+url_prefix = '/' + config.subdir if config.subdir != '' else ''
+app.register_blueprint(regular, url_prefix=url_prefix)
+app.register_blueprint(admin, url_prefix=url_prefix)
+
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'postgresql+psycopg2://{0}:{1}@{2}:{3}/{4}'.format(
@@ -30,18 +38,14 @@ db.init_app(app)
 # Sessions
 app.session_interface = RedisSessionInterface(redis)
 
-# Views
-app.register_blueprint(regular)
-app.register_blueprint(admin)
-
 
 @app.errorhandler(404)
-def not_found():
+def not_found(e):
     return render_template('error/404.jinja2'), 404
 
 
 @app.errorhandler(500)
-def not_found():
+def not_found(e):
     return render_template('error/500.jinja2'), 500
 
 

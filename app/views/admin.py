@@ -17,7 +17,7 @@ def before_request():
         return redirect(url_for('admin.login'))
 
 
-@admin.route('/install')
+@admin.route('/install', methods=['GET', 'POST'])
 def install():
     if db.engine.dialect.has_table(db.engine.connect(), 'settings'):
         return redirect(url_for('regular.index'))
@@ -100,8 +100,8 @@ def settings():
     return render_template('admin/settings.jinja2', form=form)
 
 
-@admin.route('/compose')
-@admin.route('/compose/<post_id>')
+@admin.route('/compose', methods=['GET', 'POST'])
+@admin.route('/compose/<post_id>', methods=['GET', 'POST'])
 def compose(post_id=None):
     form = ComposeForm()
 
