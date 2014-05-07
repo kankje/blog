@@ -1,0 +1,178 @@
+$fa-font-path: 'fonts';
+$fa-version: '4.0.3';
+
+@import 'lib/fontawesome/scss/font-awesome';
+
+/* Layout */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  font-weight: 300;
+  font-size: 12pt;
+  line-height: 1.3;
+}
+
+#container {
+  position: relative;
+  margin: auto;
+  max-width: 800px;
+  min-height: 100%;
+}
+
+header {
+  padding: 10px;
+  text-align: center;
+}
+
+nav {
+  text-align: center;
+}
+
+main {
+  padding: 30px 40px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  text-align: center;
+  font-size: 10pt;
+  color: #ccc;
+}
+
+/* Misc. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 300;
+  color: #333;
+}
+
+a {
+  text-decoration: none !important;
+  color: #3399f3;
+}
+
+.action {
+  margin: 10px;
+}
+
+.alert {
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ebccd1;
+  border-radius: 5px;
+  font-weight: normal;
+  background: #f2dede;
+  color: #a94442;
+}
+
+/* Forms */
+
+form {
+  margin: 0 auto;
+  max-width: 500px;
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14pt;
+  }
+
+  .form-errors {
+    margin-top: 5px;
+    font-weight: normal;
+  }
+
+  .error {
+    display: block;
+    color: #b94a48;
+  }
+
+  input, textarea {
+    width: 100%;
+    font-size: 12pt;
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    color: #333;
+    outline: none;
+  }
+
+  textarea {
+    resize: horizontal;
+  }
+
+  input:focus, textarea:focus {
+    border: solid 1px #9dcef9;
+    box-shadow: 0px 0px 10px #9dcef9;
+  }
+
+  button {
+    border: 0;
+    background: 0;
+    color: #3399f3;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-weight: 300;
+    font-size: 12pt;
+  }
+}
+
+.compose-form textarea {
+  height: 300px;
+  font-family: monospace;
+  resize: vertical;
+}
+
+/* ... */
+
+article {
+  margin-bottom: 30px;
+}
+
+.blog-title {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.blog-description {
+  margin-top: 5px;
+  color: #bbb;
+  font-size: 12pt;
+}
+
+h1.post-title {
+  font-size: 24pt;
+  margin-bottom: 5px;
+}
+
+h2.post-title {
+  font-size: 22pt;
+  margin-bottom: 5px;
+}
+
+.post-date {
+  color: #bbb;
+  margin: 0;
+}
+
+.post-content h1 {
+  font-size: 16pt;
+}
+
+.post-content h2 {
+  font-size: 12pt;
+}
+
+.next-page {
+  float: right;
+}

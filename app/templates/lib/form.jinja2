@@ -1,84 +1,30 @@
-{%- macro render_field_label(field) -%}
-  <label for="{{ field.id }}">{{ field.label.text }}
-    {% if field.flags.required %}
-      <abbr title="This field is required"> *</abbr>
+{% macro render(form) %}
+  {{ form.hidden_tag() }}
+  {% for field in form %}
+    {% if field.type != 'CSRFTokenField' and field.type != 'HiddenField' %}
+
+      <div class="form-group">
+        {% if field.type == 'SubmitField' %}
+          <button class="action">
+            <i class="fa fa-check"></i> {{ field.label.text }}
+          </button>
+        {% else %}
+          <label for="{{ field.id }}">
+            {{ field.label.text }}:
+            {% if field.flags.required %}*{% endif %}
+          </label>
+          {{ field  }}
+        {% endif %}
+
+        {% if field.errors %}
+          <div class="form-errors">
+            {% for error in field.errors %}
+              <span class="error">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
     {% endif %}
-  </label>
+  {% endfor %}
 {% endmacro %}
-
-{%- macro render_field_description(field) -%}
-  {% if field.description %}
-    <span class="desc">{{ field.description }}</span>
-  {% endif %}
-{%- endmacro -%}
-
-{%- macro render_field_errors(field) -%}
-    {% if field.errors %}
-    <div>
-        {%- for error in field.errors -%}
-        <span class="label important">{{ error }}</span>
-        {%- endfor -%}
-    </div>
-    {% endif %}
-{%- endmacro -%}
-
-{%- macro render_field_boolean(field) -%}
-	<div class="input">
-		<label>
-			{{ field(class='form-control', **kwargs) }}
-			<span>{{ field.label.text }}</span>
-			{{ render_field_description(field) }}
-			{{ render_field_errors(field) }}
-		</label>
-	</div>
-{%- endmacro -%}
-
-{%- macro render_submit(field) -%}
-  <button class="action">
-    <span class="glyphicon glyphicon-ok"></span> {{ field.label.text }}
-  </button>
-{%- endmacro -%}
-
-{%- macro render_field(field) -%}
-	<div class="clearfix form-group">
-    {% if field.type == 'HiddenField' or field.type == 'CSRFTokenField' %}
-      {{ field() }}
-    {% else %}
-      {% if field.type == 'BooleanField' %}
-        {{ render_field_boolean(field, required=field.flags.required, **kwargs) }}
-      {% else%}
-        <div class="input" id="{{field.id}}-div">
-          {% if field.type == 'SubmitField' %}
-            {{ render_submit(field) }}
-          {% else %}
-            {{ render_field_label(field) }}
-            {% if field.type == 'RadioField' %}
-              {{ field(class='radio-group form-control', required=field.flags.required, **kwargs) }}
-            {% else %}
-              {{ field(class='form-control', required=field.flags.required, **kwargs) }}
-            {% endif %}
-            {{ render_field_description(field) }}
-            {{ render_field_errors(field) }}
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endif %}
-	</div>
-{%- endmacro -%}
-
-{%- macro render_fields(fields, class=None, legend=None) -%}
-	<fieldset {% if class %}class="{{ class }}"{% endif %}>
-		{% if legend %}
-			<legend>{{ legend }}</legend>
-		{% endif %}
-    {% set counter = 0 %}
-    {% for field in fields %}
-      {% if counter == 0 %}
-        {{ render_field(field, autofocus=True) }}
-      {% else %}
-        {{ render_field(field) }}
-      {% endif %}
-      {% set counter = counter + 1 %}
-    {% endfor %}
-  </fieldset>
-{%- endmacro -%}

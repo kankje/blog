@@ -24,9 +24,9 @@ app.jinja_env.add_extension('compressinja.html.HtmlCompressor')
 assets = Environment(app)
 assets.url = app.static_url_path
 css = Bundle(
-    '../assets/css/main.scss',
+    '../assets/style.scss',
     filters=['pyscss', 'cssmin'],
-    output='main.css'
+    output='style.css'
 )
 assets.register('css', css)
 

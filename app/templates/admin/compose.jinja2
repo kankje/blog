@@ -1,13 +1,10 @@
 {% extends 'layout/layout.jinja2' %}
-{% from 'lib/form.jinja2' import render_fields %}
+{% from 'lib/form.jinja2' import render %}
 
 {% block title %}Compose a new post{% endblock %}
 
 {% block content %}
-  <div class="form compose-form">
-    <form method="post">
-      {{ form.hidden_tag() }}
-      {{ render_fields(form) }}
-    </form>
-  </div>
+  <form class="compose-form" method="post">
+    {{ render(form) }}
+  </form>
 {% endblock %}

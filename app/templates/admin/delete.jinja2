@@ -3,16 +3,14 @@
 {% block title %}Delete a post{% endblock %}
 
 {% block content %}
-  <div class="form">
-    <div class="alert alert-danger">
-      Are you sure you want to delete the post "{{ post.title }}"?<br />
-      This action cannot be undone!
-    </div>
-    <a class="action" href="{{ url_for('admin.delete', post_id=post.id, confirm='yes') }}">
-      <span class="glyphicon glyphicon-ok"></span> Delete
-    </a>
-    <a class="action" href="{{ url_for('index.post', post_id=post.id, link_text=post.link_text) }}">
-      <span class="glyphicon glyphicon-remove"></span> Cancel
-    </a>
+  <div class="alert">
+    Are you sure you want to delete the post "{{ post.title }}"?<br />
+    This action cannot be undone!
   </div>
+  <a class="action" href="{{ url_for('admin.delete', post_id=post.id, confirm='yes') }}">
+    <span class="fa fa-check"></span> Delete
+  </a>
+  <a class="action" href="{{ url_for('regular.post', post_id=post.id, link_text=post.link_text) }}">
+    <span class="fa fa-times"></span> Cancel
+  </a>
 {% endblock %}

@@ -1,19 +1,16 @@
 {% extends 'layout/layout.jinja2' %}
-{% from 'lib/form.jinja2' import render_fields, render_submit %}
+{% from 'lib/form.jinja2' import render %}
 
 {% block title %}Installation{% endblock %}
 
 {% block content %}
-  <div class="form">
-    {% if install_error %}
-      <div class="alert alert-danger">
-        Installation failed with the following error:<br />
-        {{ install_error }}
-      </div>
-    {% endif %}
-    <form method="post">
-      {{ form.hidden_tag() }}
-      {{ render_fields(form) }}
-    </form>
-  </div>
+  {% if install_error %}
+    <div class="alert">
+      Installation failed with the following error:<br />
+      {{ install_error }}
+    </div>
+  {% endif %}
+  <form method="post">
+    {{ render(form) }}
+  </form>
 {% endblock %}

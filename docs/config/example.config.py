@@ -1,7 +1,5 @@
 import os
 
-root_path = os.path.dirname(os.path.abspath(__file__))
-
 debug = False
 subdir = ''
 cookie_secret = 'GENERATE_OWN_SECRET_HERE'

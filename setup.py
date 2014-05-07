@@ -13,7 +13,7 @@ setup(
         # Web
         'Flask==0.10.1',
         'Flask-Assets==0.9',
-        'pyScss==1.2.0',
+        'pyScss==1.2.0.post3',
         'cssmin==0.2.0',
         'Flask-WTF==0.9.5',
         'Flask-SQLAlchemy==1.0',

@@ -1,13 +1,10 @@
 {% extends 'layout/layout.jinja2' %}
-{% from 'lib/form.jinja2' import render_fields %}
+{% from 'lib/form.jinja2' import render %}
 
 {% block title %}Settings{% endblock %}
 
 {% block content %}
-  <div class="form">
-    <form method="post">
-      {{ form.hidden_tag() }}
-      {{ render_fields(form) }}
-    </form>
-  </div>
+  <form method="post">
+    {{ render(form) }}
+  </form>
 {% endblock %}

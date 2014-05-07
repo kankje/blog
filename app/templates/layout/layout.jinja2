@@ -11,41 +11,47 @@
     {% endassets %}
   </head>
   <body>
-    <main class="container">
-      <header class="center">
+    <div id="container">
+
+      <header>
         <a href="{{ url_for('regular.index') }}">
           <h1 class="blog-title">{{ g.settings.blog_name }}</h1>
           <p class="blog-description">{{ g.settings.blog_description }}</p>
         </a>
-        {% if session.logged_in %}
+      </header>
+
+      {% if session.logged_in %}
+        <nav>
           <a class="action" href="{{ url_for('admin.settings') }}">
-            <span class="glyphicon glyphicon-wrench"></span> Settings
+            <i class="fa fa-wrench"></i> Settings
           </a>
           <a class="action" href="{{ url_for('admin.compose') }}">
-            <span class="glyphicon glyphicon-pencil"></span> New post
+            <span class="fa fa-pencil"></span> New post
           </a>
           {% if post %}
             <a class="action" href="{{ url_for('admin.compose', post_id=post.id) }}">
-              <span class="glyphicon glyphicon-edit"></span> Edit
+              <span class="fa fa-pencil-square-o"></span> Edit
             </a>
             <a class="action" href="{{ url_for('admin.delete', post_id=post.id) }}">
-              <span class="glyphicon glyphicon-trash"></span> Delete
+              <span class="fa fa-trash-o"></span> Delete
             </a>
           {% endif %}
           <a class="action" href="{{ url_for('admin.logout') }}">
-            <span class="glyphicon glyphicon-log-out"></span> Log out
+            <span class="fa fa-sign-out"></span> Log out
           </a>
-        {% endif %}
-      </header>
-      {% block content %}{% endblock %}
-    </main>
-    {% if g.settings.blog_author %}
-      <footer class="center">
-        <div id="footer-fader"></div>
-        <div class="container">
-          <p>Copyright &copy; {{ g.settings.blog_author }}</p>
-        </div>
-      </footer>
-    {% endif %}
+        </nav>
+      {% endif %}
+
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+
+      {% if g.settings.blog_author %}
+        <footer>
+          Copyright &copy; {{ g.settings.blog_author }}
+        </footer>
+      {% endif %}
+
+    </div>
   </body>
 </html>

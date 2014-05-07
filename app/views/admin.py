@@ -95,7 +95,7 @@ def settings():
         settings.blog_description = form.blog_description.data
         settings.blog_author = form.blog_author.data
         db.session.commit()
-        return redirect(url_for('request.index'))
+        return redirect(url_for('regular.index'))
 
     return render_template('admin/settings.jinja2', form=form)
 
@@ -143,10 +143,10 @@ def compose(post_id=None):
 @admin.route('/delete/<post_id>/confirm/<confirm>')
 def delete(post_id, confirm=None):
     if confirm == 'yes':
-        Post.filter_by(id=post_id).delete()
+        Post.query.filter_by(id=post_id).delete()
         return redirect(url_for('regular.index'))
 
     return render_template(
         'admin/delete.jinja2',
-        post=Post.filter_by(id=post_id).one()
+        post=Post.query.filter_by(id=post_id).one()
     )
