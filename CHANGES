@@ -2,7 +2,8 @@ Revision history for blog.
 
 1.0.0 2014-??-??
 
-  * Moved to Flask from Tornado.
+  * Moved to Flask from Tornado
+  * Removed Bootstrap, added Font Awesome
 
 0.2.0 2014-04-13
 
