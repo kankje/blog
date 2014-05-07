@@ -12,6 +12,7 @@ class Settings(db.Model):
     blog_name = db.Column(db.String(200))
     blog_description = db.Column(db.Text)
     blog_author = db.Column(db.String(200))
+    custom_html = db.Column(db.Text)
 
 
 class Post(db.Model):

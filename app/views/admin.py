@@ -3,7 +3,8 @@ from flask import Blueprint, request, session, g, render_template, redirect, url
 from sqlalchemy.exc import SQLAlchemyError
 from markdown import markdown
 from app.models import db, Settings, Post
-from app.forms.admin import InstallForm, LoginForm, SettingsForm, ComposeForm
+from app.forms.admin import InstallForm, LoginForm, BlogSettingsForm, \
+    UserSettingsForm, ComposeForm
 from lib import crypt
 from lib.canocalize import canocalize
 
@@ -61,10 +62,10 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         login_failed = True
-        settings = Settings.query.one()
-        if settings.username == form.username.data:
-            password_hash = crypt.hash_password(form.password.data, settings.salt)
-            if settings.password == password_hash:
+        s = Settings.query.one()
+        if s.username == form.username.data:
+            password_hash = crypt.hash_password(form.password.data, s.salt)
+            if s.password == password_hash:
                 session['logged_in'] = True
                 return redirect(url_for('regular.index'))
 
@@ -83,37 +84,52 @@ def logout():
 
 @admin.route('/settings', methods=['GET', 'POST'])
 def settings():
-    form = SettingsForm()
+    s = Settings.query.one()
+    saved = False
 
-    settings = Settings.query.one()
-    form.blog_name.data = settings.blog_name
-    form.blog_description.data = settings.blog_description
-    form.blog_author.data = settings.blog_author
+    blog_form = BlogSettingsForm(prefix='blog')
+    blog_form.blog_name.data = s.blog_name
+    blog_form.blog_description.data = s.blog_description
+    blog_form.blog_author.data = s.blog_author
+    blog_form.custom_html.data = s.custom_html
 
-    if form.validate_on_submit():
-        settings.blog_name = form.blog_name.data
-        settings.blog_description = form.blog_description.data
-        settings.blog_author = form.blog_author.data
+    user_form = UserSettingsForm(prefix='user')
+    user_form.username.data = s.username
+
+    if 'blog-submit' in request.form and blog_form.validate_on_submit():
+        s.blog_name = blog_form.blog_name.data
+        s.blog_description = blog_form.blog_description.data
+        s.blog_author = blog_form.blog_author.data
+        s.custom_html = blog_form.custom_html.data
         db.session.commit()
-        return redirect(url_for('regular.index'))
+        saved = True
 
-    return render_template('admin/settings.jinja2', form=form)
+    if 'user-submit' in request.form and user_form.validate_on_submit():
+        salt = crypt.generate_salt()
+        s.username = user_form.username.data
+        s.password = crypt.hash_password(user_form.password.data, salt)
+        s.salt = salt
+        db.session.commit()
+        saved = True
+
+    return render_template(
+        'admin/settings.jinja2',
+        blog_form=blog_form,
+        user_form=user_form,
+        saved=saved
+    )
 
 
 @admin.route('/compose', methods=['GET', 'POST'])
 @admin.route('/compose/<post_id>', methods=['GET', 'POST'])
 def compose(post_id=None):
-    form = ComposeForm()
-
+    post = None
     if post_id:
-        post = Post.query.filter_by(id=post_id).one()
-        form.id.data = post.id
-        form.title.data = post.title
-        form.content.data = post.content
+        post = Post.query.get_or_404(post_id)
+    form = ComposeForm(obj=post)
 
     if form.validate_on_submit():
-        if form.id.data != '':
-            post = Post.query.filter_by(id=form.id.data).one()
+        if post:
             post.title = form.title.data
             post.link_text = canocalize(
                 form.title.data
@@ -129,7 +145,7 @@ def compose(post_id=None):
                 creation_date=datetime.now()
             )
             db.session.add(post)
-            db.session.commit()
+        db.session.commit()
         return redirect(url_for(
             'regular.post',
             post_id=post.id,
@@ -148,5 +164,5 @@ def delete(post_id, confirm=None):
 
     return render_template(
         'admin/delete.jinja2',
-        post=Post.query.filter_by(id=post_id).one()
+        post=Post.query.get_or_404(post_id)
     )

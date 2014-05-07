@@ -3,8 +3,7 @@ from wtforms import TextField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length
 
 
-class SettingsForm(Form):
-    # TODO password fields
+class BlogSettingsForm(Form):
     blog_name = TextField('Blog name', [
         InputRequired(),
         Length(1, 200)
@@ -16,4 +15,6 @@ class SettingsForm(Form):
         InputRequired(),
         Length(1, 200)
     ])
+    custom_html = TextAreaField('Custom HTML')
+
     submit = SubmitField('Save')

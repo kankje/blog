@@ -18,6 +18,7 @@ app.debug = config.debug
 app.secret_key = config.cookie_secret
 
 # Jinja2 extensions
+app.jinja_env.filters['nl2br'] = lambda value: value.replace('\n', '<br>')
 app.jinja_env.add_extension('compressinja.html.HtmlCompressor')
 
 # Assets

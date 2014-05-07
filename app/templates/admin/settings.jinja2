@@ -4,7 +4,23 @@
 {% block title %}Settings{% endblock %}
 
 {% block content %}
-  <form method="post">
-    {{ render(form) }}
-  </form>
+  <div class="form-container">
+    {% if saved %}
+      <div class="success">Your settings have been saved.</div>
+    {% endif %}
+
+    <fieldset>
+      <legend>Blog settings</legend>
+      <form class="settings-blog-form" method="post">
+        {{ render(blog_form) }}
+      </form>
+    </fieldset>
+
+    <fieldset>
+      <legend>User settings</legend>
+      <form method="post">
+        {{ render(user_form) }}
+      </form>
+    </fieldset>
+  </div>
 {% endblock %}

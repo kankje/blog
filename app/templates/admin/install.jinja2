@@ -4,13 +4,16 @@
 {% block title %}Installation{% endblock %}
 
 {% block content %}
-  {% if install_error %}
-    <div class="alert">
-      Installation failed with the following error:<br />
-      {{ install_error }}
-    </div>
-  {% endif %}
-  <form method="post">
-    {{ render(form) }}
-  </form>
+  <div class="form-container">
+    {% if install_error %}
+      <div class="alert">
+        Installation failed with the following error:<br />
+        {{ install_error }}
+      </div>
+    {% endif %}
+
+    <form method="post">
+      {{ render(form) }}
+    </form>
+  </div>
 {% endblock %}

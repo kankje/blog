@@ -1,11 +1,12 @@
 {% macro render(form) %}
   {{ form.hidden_tag() }}
+  {% set count = 0 %}
   {% for field in form %}
     {% if field.type != 'CSRFTokenField' and field.type != 'HiddenField' %}
 
       <div class="form-group">
         {% if field.type == 'SubmitField' %}
-          <button class="action">
+          <button class="action" name="{{ field.name }}">
             <i class="fa fa-check"></i> {{ field.label.text }}
           </button>
         {% else %}
@@ -13,7 +14,12 @@
             {{ field.label.text }}:
             {% if field.flags.required %}*{% endif %}
           </label>
-          {{ field  }}
+          {% if count == 0 %}
+            {{ field(autofocus=true)  }}
+          {% else %}
+            {{ field  }}
+          {% endif %}
+          {% set count = count + 1 %}
         {% endif %}
 
         {% if field.errors %}

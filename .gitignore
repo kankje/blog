@@ -9,5 +9,5 @@ dist/
 venv/
 assets/lib
 public/.webassets-cache
-public/main.css
+public/style.css
 app/config.py
