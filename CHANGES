@@ -1,9 +1,11 @@
 Revision history for blog.
 
-1.0.0 2014-??-??
+1.0.0 2014-05-07
 
   * Moved to Flask from Tornado
   * Removed Bootstrap, added Font Awesome
+  * Added option for adding custom HTML at the end of the page
+  * Added option to change the username and password
 
 0.2.0 2014-04-13
 
