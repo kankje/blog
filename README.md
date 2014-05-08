@@ -10,6 +10,7 @@ Requirements
 ------------
 
 * Python 3, pip and virtualenv
+* bower
 * PostgreSQL server and redis
 * nginx and uwsgi
 
@@ -29,7 +30,7 @@ Installation
     * `$ ln -s /etc/uwsgi/apps-available/blog.ini /etc/uwsgi/apps-enabled/blog.ini`
 5. Create a virtualenv: `$ virtualenv venv`
 6. Activate the virtualenv: `$ source venv/bin/activate`
-7. Install the dependencies: `$ python setup.py install`
+7. Install the dependencies: `$ python setup.py install` and `$ bower install`
 8. Start the blog service: `$ service blog start`
 9. Visit `https://your-blog.com/admin/install`
 10. After the installation, you can log in using `https://your-blog.com/admin/login`
