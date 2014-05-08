@@ -1,5 +1,3 @@
-import os
-
 debug = False
 subdir = ''
 cookie_secret = 'GENERATE_OWN_SECRET_HERE'

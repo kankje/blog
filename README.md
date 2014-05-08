@@ -26,7 +26,7 @@ Installation
     * `$ cp docs/config/example.nginx.conf /etc/nginx/sites-available/blog`
     * `$ ln -s /etc/nginx/sites-available/blog /etc/nginx/sites-enabled/blog`
     * `$ cp docs/config/example.uwsgi.ini /etc/uwsgi/apps-available/blog.ini`
-    * `$ ln -s /etc/uwsgi/apps-available/blog /etc/uwsgi/apps-enabled/blog.ini`
+    * `$ ln -s /etc/uwsgi/apps-available/blog.ini /etc/uwsgi/apps-enabled/blog.ini`
 5. Create a virtualenv: `$ virtualenv venv`
 6. Activate the virtualenv: `$ source venv/bin/activate`
 7. Install the dependencies: `$ python setup.py install`

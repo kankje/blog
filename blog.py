@@ -8,10 +8,10 @@ from app.views.regular import regular
 from app.views.admin import admin
 from lib.session import RedisSessionInterface
 
-
 app = Flask(
     __name__,
     static_folder='public',
+    static_url_path=config.url_prefix + '/public',
     template_folder=os.path.join('app', 'templates')
 )
 app.debug = config.debug
@@ -31,10 +31,9 @@ css = Bundle(
 )
 assets.register('css', css)
 
-# Views
-url_prefix = '/' + config.subdir if config.subdir != '' else ''
-app.register_blueprint(regular, url_prefix=url_prefix)
-app.register_blueprint(admin, url_prefix=url_prefix)
+# View
+app.register_blueprint(regular, url_prefix=config.url_prefix)
+app.register_blueprint(admin, url_prefix=config.url_prefix)
 
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = \
