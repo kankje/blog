@@ -88,13 +88,7 @@ def settings():
     saved = False
 
     blog_form = BlogSettingsForm(prefix='blog')
-    blog_form.blog_name.data = s.blog_name
-    blog_form.blog_description.data = s.blog_description
-    blog_form.blog_author.data = s.blog_author
-    blog_form.custom_html.data = s.custom_html
-
     user_form = UserSettingsForm(prefix='user')
-    user_form.username.data = s.username
 
     if 'blog-submit' in request.form and blog_form.validate_on_submit():
         s.blog_name = blog_form.blog_name.data
@@ -111,6 +105,12 @@ def settings():
         s.salt = salt
         db.session.commit()
         saved = True
+
+    blog_form.blog_name.data = s.blog_name
+    blog_form.blog_description.data = s.blog_description
+    blog_form.blog_author.data = s.blog_author
+    blog_form.custom_html.data = s.custom_html
+    user_form.username.data = s.username
 
     return render_template(
         'admin/settings.jinja2',

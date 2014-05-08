@@ -22,7 +22,7 @@
         </a>
       </header>
 
-      {% if session.logged_in %}
+      {% if session.logged_in and request.endpoint != 'admin.install' %}
         <nav>
           <a class="action" href="{{ url_for('admin.settings') }}">
             <i class="fa fa-wrench"></i> Settings
