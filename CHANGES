@@ -1,5 +1,11 @@
 Revision history for blog.
 
+1.0.2 2014-05-08
+
+  * Fixed settings form
+  * Fixed asset URLs when in a subdirectory
+  * Cleanup
+
 1.0.1 2014-05-08
 
   * Properly get assets if in subdirectory
